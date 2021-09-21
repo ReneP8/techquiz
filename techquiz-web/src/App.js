@@ -1,8 +1,14 @@
 import './App.css';
+import Navbar from './components/Navbar';
+import Home from './pages/Home';
+
 
 function App() {
   return (
-    <div>Hallo Welt</div>
+    <div>
+      <Navbar />,
+      <Home />
+    </div>
   );
 }
 
