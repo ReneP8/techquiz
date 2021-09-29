@@ -1,5 +1,5 @@
 import "./App.css";
-import Home from "./pages/Home";
+import Random from "./pages/Random";
 import 'bootstrap/dist/css/bootstrap.min.css'
 
 import { Route, Switch } from "react-router-dom";
@@ -9,7 +9,7 @@ function App() {
     <div>
       <Switch>
         <Route path="/">
-          <Home/>
+          <Random />
         </Route>
       </Switch>
     </div>
