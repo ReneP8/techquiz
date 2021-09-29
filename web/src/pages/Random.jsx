@@ -26,6 +26,10 @@ function Random() {
 
   return (
     <div className="home-div">
+      <div className="text-center mb-3 text-white">
+        <h1>Random Quiz</h1>
+      </div>
+
       {randomQuestion && (
         <Question
           title={randomQuestion.category}
