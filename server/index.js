@@ -6,6 +6,8 @@ const mongoose = require('mongoose');
 const questionRoute = require('./routes/questions');
 const app = express();
 
+require('dotenv').config();
+
 // enable middleware
 app.use(morgan('common'));
 app.use(cors({
