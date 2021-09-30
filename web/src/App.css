@@ -3,7 +3,7 @@ body {
 }
 
 .home-div {
-    margin-top: 35vh;
-    display: flex;
+    margin-top: 20vh;
+    display: grid;
     justify-content: center;
 }

@@ -1,7 +1,8 @@
-import { useEffect, useState } from 'react';
-import Question from '../components/Question'
+import { useEffect, useState } from "react";
+import Question from "../components/Question";
 
-const TRIVIA_URL = 'https://opentdb.com/api.php?amount=1&category=18&type=multiple';
+const TRIVIA_URL =
+  "https://opentdb.com/api.php?amount=1&category=18&type=multiple";
 
 async function getRandomQuestion() {
   try {
@@ -10,7 +11,7 @@ async function getRandomQuestion() {
   } catch (error) {
     console.log(error);
   }
-};
+}
 
 function Random() {
   const [randomQuestion, setRandomQuestion] = useState(null);
@@ -25,10 +26,18 @@ function Random() {
 
   return (
     <div className="home-div">
-      {
-        randomQuestion &&
-        <Question title={randomQuestion?.category} question={randomQuestion.question} correctAnswer={randomQuestion.correct_answer} incorrectAnswers={randomQuestion.incorrect_answers}></Question>
-      }
+      <div className="text-center mb-3 text-white">
+        <h1>Random Quiz</h1>
+      </div>
+
+      {randomQuestion && (
+        <Question
+          title={randomQuestion.category}
+          question={randomQuestion.question}
+          correctAnswer={randomQuestion.correct_answer}
+          incorrectAnswers={randomQuestion.incorrect_answers}
+        ></Question>
+      )}
     </div>
   );
 }
