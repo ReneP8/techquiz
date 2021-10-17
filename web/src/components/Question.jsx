@@ -1,35 +1,42 @@
-import { Card, Button, Row, Col } from "react-bootstrap";
+import { Card, Button } from "react-bootstrap";
 
 function Question(props) {
+  const answers = [];
+
+  function shuffle(array) {
+    array.sort(() => Math.random() - 0.5);
+  }
+
+  function prepareAnswers() {
+    answers.push({
+      text: props.correctAnswer,
+      correct: true,
+    });
+
+    props.incorrectAnswers.forEach((incorrectAnswer) => {
+      answers.push({
+        text: incorrectAnswer,
+        correct: false,
+      });
+    });
+
+    shuffle(answers);
+  }
+
+  prepareAnswers();
+
   return (
     <Card>
       <Card.Body>
         <Card.Title>{props.title}</Card.Title>
         <Card.Text>{props.question}</Card.Text>
-        <Row className="mt-3">
-          <Col className="d-grid gap-2">
-            <Button variant="secondary" bsSize="large" block>
-              {props.correctAnswer}
+        {answers.map((element) => {
+          return (
+            <Button variant="secondary" bsSize="large" block className="m-2">
+              {element.text}
             </Button>
-          </Col>
-          <Col className="d-grid gap-2">
-            <Button variant="secondary" bsSize="large" block>
-              {props.incorrectAnswers[0]}
-            </Button>
-          </Col>
-        </Row>
-        <Row className="mt-3">
-          <Col className="d-grid gap-2">
-            <Button variant="secondary" bsSize="large" block>
-              {props.incorrectAnswers[1]}
-            </Button>
-          </Col>
-          <Col className="d-grid gap-2">
-            <Button variant="secondary" bsSize="large" block>
-              {props.incorrectAnswers[2]}
-            </Button>
-          </Col>
-        </Row>
+          );
+        })}
       </Card.Body>
     </Card>
   );
