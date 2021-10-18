@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
 import Question from "../components/Question";
+import { Button } from "react-bootstrap";
+
 
 const TRIVIA_URL =
   "https://opentdb.com/api.php?amount=1&category=18&type=multiple";
@@ -15,6 +17,11 @@ async function getRandomQuestion() {
 
 function Random() {
   const [randomQuestion, setRandomQuestion] = useState(null);
+
+  // async function pullNewQuestion() {
+  //   const question = await getRandomQuestion();
+  //   setRandomQuestion(question);
+  // }
 
   useEffect(() => {
     getRandomQuestion().then((data) => {
@@ -38,6 +45,8 @@ function Random() {
           incorrectAnswers={randomQuestion.incorrect_answers}
         ></Question>
       )}
+
+      {/* <Button className="mt-2" onClick={useEffect}>Next</Button> */}
     </div>
   );
 }
