@@ -2,8 +2,13 @@ body {
     background-color: #02577a !important;
 }
 
-.home-div {
+.header {
     margin-top: 20vh;
-    display: grid;
-    justify-content: center;
+    margin-right: 10vh;
+    margin-left: 10vh;
+}
+
+.randomQuestion {
+    margin-right: 10vh;
+    margin-left: 10vh;
 }

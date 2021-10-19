@@ -1,52 +1,85 @@
 import { useEffect, useState } from "react";
 import Question from "../components/Question";
-import { Button } from "react-bootstrap";
+import { Button, Col, Row } from "react-bootstrap";
+
+import sound_correct from "../assets/sounds/correct_answer.mp3";
+import sound_wrong from "../assets/sounds/wrong_answer.mp3";
+
+const correctAudio = new Audio(sound_correct);
+correctAudio.volume = 0.8;
+const wrongAudio = new Audio(sound_wrong);
+wrongAudio.volume = 0.6;
 
 
 const TRIVIA_URL =
   "https://opentdb.com/api.php?amount=1&category=18&type=multiple";
 
-async function getRandomQuestion() {
-  try {
-    const response = await fetch(TRIVIA_URL);
-    return response.json();
-  } catch (error) {
-    console.log(error);
-  }
-}
-
 function Random() {
   const [randomQuestion, setRandomQuestion] = useState(null);
+  const [points, setPoints] = useState(0);
 
-  // async function pullNewQuestion() {
-  //   const question = await getRandomQuestion();
-  //   setRandomQuestion(question);
-  // }
+  function checkResult(correct) {
+    if (correct) {
+      correctAudio.play();
+      setPoints(points + 10);
+    }
+    else {
+      wrongAudio.play();
+    }
+  }
+
+
+  async function fetchRandomQuestion() {
+    try {
+      const response = await fetch(TRIVIA_URL);
+      return response.json();
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  async function getRandomQeustion() {
+    try {
+      const response = await fetchRandomQuestion();
+      console.log(response.results[0]);
+      setRandomQuestion(response.results[0])
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   useEffect(() => {
-    getRandomQuestion().then((data) => {
-      const question = data.results[0];
-      console.log(question);
-      setRandomQuestion(question);
-    });
+    getRandomQeustion();
   }, []);
 
   return (
-    <div className="home-div">
-      <div className="text-center mb-3 text-white">
-        <h1>Random Quiz</h1>
+    <div className="container">
+      <div className="header">
+        <div className="mb-3 text-white">
+          <Row>
+            <Col>
+              <h1>Random Quiz</h1>
+            </Col>
+            <Col className="pt-2 text-end">
+              <h3>Your Points: {points}</h3>
+            </Col>
+          </Row>
+        </div>
       </div>
 
-      {randomQuestion && (
-        <Question
-          title={randomQuestion.category}
-          question={randomQuestion.question}
-          correctAnswer={randomQuestion.correct_answer}
-          incorrectAnswers={randomQuestion.incorrect_answers}
-        ></Question>
-      )}
+      <div className="randomQuestion">
+        {randomQuestion && (
+          <Question
+            title={randomQuestion.category}
+            question={randomQuestion.question}
+            correctAnswer={randomQuestion.correct_answer}
+            incorrectAnswers={randomQuestion.incorrect_answers}
+            onAnswerClicked={checkResult}
+          ></Question>
+        )}
 
-      {/* <Button className="mt-2" onClick={useEffect}>Next</Button> */}
+        <Button className="mt-1 btn-block" onClick={getRandomQeustion}>Next</Button>
+      </div>
     </div>
   );
 }
