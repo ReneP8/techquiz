@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import Question from "../components/Question";
-import { Button, Col, Row } from "react-bootstrap";
+import { Col, Row } from "react-bootstrap";
 
 import sound_correct from "../assets/sounds/correct_answer.mp3";
 import sound_wrong from "../assets/sounds/wrong_answer.mp3";
@@ -26,6 +26,10 @@ function Random() {
     else {
       wrongAudio.play();
     }
+
+    setTimeout(function(){
+      getRandomQeustion();
+  }, 2000);
   }
 
 
@@ -77,8 +81,6 @@ function Random() {
             onAnswerClicked={checkResult}
           ></Question>
         )}
-
-        <Button className="mt-1 btn-block" onClick={getRandomQeustion}>Next</Button>
       </div>
     </div>
   );
