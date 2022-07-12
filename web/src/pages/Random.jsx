@@ -6,10 +6,9 @@ import sound_correct from "../assets/sounds/correct_answer.mp3";
 import sound_wrong from "../assets/sounds/wrong_answer.mp3";
 
 const correctAudio = new Audio(sound_correct);
-correctAudio.volume = 0.8;
+correctAudio.volume = 0.01;
 const wrongAudio = new Audio(sound_wrong);
-wrongAudio.volume = 0.6;
-
+wrongAudio.volume = 0.01;
 
 const TRIVIA_URL =
   "https://opentdb.com/api.php?amount=1&category=18&type=multiple";
@@ -22,16 +21,14 @@ function Random() {
     if (correct) {
       correctAudio.play();
       setPoints(points + 10);
-    }
-    else {
+    } else {
       wrongAudio.play();
     }
 
-    setTimeout(function(){
+    setTimeout(function () {
       getRandomQeustion();
-  }, 2000);
+    }, 2000);
   }
-
 
   async function fetchRandomQuestion() {
     try {
@@ -46,11 +43,11 @@ function Random() {
     try {
       const response = await fetchRandomQuestion();
       console.log(response.results[0]);
-      setRandomQuestion(response.results[0])
+      setRandomQuestion(response.results[0]);
     } catch (error) {
       console.log(error);
     }
-  };
+  }
 
   useEffect(() => {
     getRandomQeustion();
@@ -62,7 +59,7 @@ function Random() {
         <div className="mb-3 text-white">
           <Row>
             <Col>
-              <h1>Random Quiz</h1>
+              <h1>Tech Quiz</h1>
             </Col>
             <Col className="pt-2 text-end">
               <h3>Your Points: {points}</h3>

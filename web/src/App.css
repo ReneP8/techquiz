@@ -1,5 +1,5 @@
 body {
-    background-color: #02577a !important;
+    background-color: #161b22 !important;
 }
 
 .header {
@@ -11,4 +11,5 @@ body {
 .randomQuestion {
     margin-right: 10vh;
     margin-left: 10vh;
+    text-align: center;
 }
